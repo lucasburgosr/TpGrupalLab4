@@ -23,5 +23,4 @@ public class Noticia {
     @JoinColumn(name = "fk_empresa")
     private Empresa empresa;
 
-
 }
