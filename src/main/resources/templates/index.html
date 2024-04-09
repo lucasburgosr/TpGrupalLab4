@@ -1,17 +1,46 @@
-<table width="50%" align="center">
-    <tr>
-        <td width="50%">
-            <b>EMPRESA</b>
-        </td>
-        <td>
-            <b>VER PAGINA</b>
-        </td>
+<!--<table width="50%" align="center">
+   <tr>
+       <td width="50%">
+           <b>EMPRESA</b>
+       </td>
+       <td>
+           <b>VER PAGINA</b>
+       </td>
+   </tr>
+   <tr th:each="empresa : ${empresas}">
+
+       <td th:text="${empresa.denominacion}">Denominacion</td>
+       <td><a th:href="@{'home.html?id=' + ${empresa.id}}">URL PAGINA HOME</a></td>
+
+   </tr>
+
+</table>-->
+
+<!DOCTYPE html> <!-- Declaración del tipo de documento HTML -->
+<html xmlns:th="http://www.thymeleaf.org"> <!-- Declaración del espacio de nombres para Thymeleaf -->
+<head>
+    <title>Lista de Empresas</title> <!-- Título de la página -->
+</head>
+<body>
+<h1>Listado de Empresas</h1> <!-- Encabezado principal de la página -->
+<table th:width="50%" > <!-- Tabla para mostrar el listado de empresas -->
+    <thead>
+    <tr> <!-- Fila de encabezado de la tabla -->
+        <th>EMPRESA</th> <!-- Celda de encabezado para el nombre de la empresa -->
+        <th>VER PAGINA</th> <!-- Celda de encabezado para el enlace a la página home.html -->
     </tr>
+    </thead>
+    <tbody>
+    <!-- Iteración sobre la lista de empresas recibida desde el backend -->
     <tr th:each="empresa : ${empresas}">
-
-        <td th:text="${empresa.denominacion}">Denominación</td>
-        <td><a th:href="@{'home.html?id=' + ${empresa.id}}">URL PAGINA HOME</a></td>
-
+        <!-- Celda para mostrar la denominación de la empresa -->
+        <td th:text="${empresa.denominacion}">Denominacion</td>
+        <!-- Celda para el enlace a la página home.html con el ID de la empresa como parámetro -->
+        <td>
+            <a th:href="@{'home.html?id=' + ${empresa.id}}">Ver Pagina Home</a>
+        </td>
     </tr>
-
+    </tbody>
 </table>
+</body>
+</html>

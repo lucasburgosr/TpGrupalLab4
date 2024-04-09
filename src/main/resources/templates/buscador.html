@@ -85,7 +85,7 @@
                             CONTENT
   =========================================================-->
 
-    <main>        
+   <!-- <main>
 
       <section class="well well4">
 		
@@ -196,15 +196,47 @@
 				</tbody>
 			</table>
 			<hr>
-			
-			
           </div>
         </div>
-      </section>   
-      
+      </section>
+    </main>-->
+	  <main>
+		  <section class="well well4">
+			  <div class="container">
+				  <!-- Agregar el título de la sección -->
+				  <h2>Resultados de Búsqueda</h2>
 
-    </main>
-
+				  <!-- Iterar sobre los resultados de búsqueda -->
+				  <div class="row offs2">
+					  <table th:width="90%" th:align="center">
+						  <tbody>
+						  <!-- Aquí va la lógica de Thymeleaf para iterar sobre los resultados de búsqueda -->
+						  <tr th:each="noticia : ${resultados}">
+							  <td>
+								  <!-- Enlace a la página de detalle de la noticia -->
+								  <a th:href="@{'detalle.html?id=' + ${noticia.id}}">
+									  <!-- Mostrar la imagen de la noticia -->
+									  <img width="250px" class="imgNoticia" th:src="${noticia.imagenNoticia}" alt="">
+								  </a>
+							  </td>
+							  <td th:width="25"></td>
+							  <td style="text-align: justify;" valign="top">
+								  <!-- Enlace a la página de detalle de la noticia -->
+								  <a th:href="@{'detalle.html?id=' + ${noticia.id}}" style="text-align: justify; font-size: 20px" class="banner" th:text="${noticia.tituloNoticia}"></a>
+								  <div class="verOcultar">
+									  <!-- Mostrar el resumen de la noticia -->
+									  <span th:text="${noticia.resumenNoticia}"></span>
+									  <a th:href="@{'detalle.html?id=' + ${noticia.id}}" style="color: blue">Leer Más - <span th:text="${#dates.format(noticia.fechaPublicacion, 'yyyy-MM-dd')}"></span></a>
+								  </div>
+							  </td>
+						  </tr>
+						  </tbody>
+					  </table>
+					  <hr>
+				  </div>
+			  </div>
+		  </section>
+	  </main>
     <!--========================================================
                             FOOTER
   =========================================================-->

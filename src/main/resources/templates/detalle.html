@@ -85,7 +85,7 @@
                             CONTENT
   =========================================================-->
 
-    <main>        
+   <!-- <main>
 
       <section class="well well4">
 		
@@ -120,8 +120,52 @@
       </section>   
       
 
-    </main>
+    </main>-->
 
+      <main>
+          <section class="well well4">
+              <div class="container">
+                  <center>
+                      <!-- Establece el estilo de la imagen principal -->
+                      <div id="imagenPrincipal"
+                           th:style="'height: 450px; background-image: url(\'' + ${noticia.imagenNoticia} + '\'); background-repeat: no-repeat;background-size: cover;'">
+                          <div style="text-align:left; background-color: rgba(1,1,1,0.5);color: #ffffff;font-size: 16px;line-height: 50px;">
+                              <!-- Muestra el título de la noticia -->
+                              <span th:text="${noticia.tituloNoticia}">Titulo de la Noticia</span>
+                          </div>
+                      </div>
+                  </center>
+                  <!-- Muestra el título de la noticia -->
+                  <h2>
+                      <span th:text="${noticia.tituloNoticia}">Titulo de la Noticia</span>
+                  </h2>
+                  <!-- Muestra la fecha de publicación -->
+                  <span th:text="'Fecha Publicacion: ' + ${noticia.fechaPublicacion}">Fecha Publicacion: 12/02/2020</span>
+                  <hr>
+                  <div class="row offs2">
+                      <div class="col-lg-12">
+                          <dl class="terms-list">
+                              <dt>
+                                  Resumen de la noticia
+                              </dt>
+                              <hr>
+                              <dd th:text="${noticia.resumenNoticia}">
+                                  Contenido HTML de la Noticia
+                              </dd>
+                              <hr>
+                              <dt>
+                                  Contenido HTML
+                              </dt>
+                              <!-- Muestra el contenido HTML de la noticia -->
+                              <dd th:utext="${noticia.contenidoHtml}">
+                                  Contenido HTML de la Noticia
+                              </dd>
+                          </dl>
+                      </div>
+                  </div>
+              </div>
+          </section>
+      </main>
     <!--========================================================
                             FOOTER
   =========================================================-->
