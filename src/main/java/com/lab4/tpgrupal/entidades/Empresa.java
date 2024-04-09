@@ -1,13 +1,19 @@
 package com.lab4.tpgrupal.entidades;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "empresa")
-public class Empresa {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class Empresa extends Base {
+
     @Column(name = "denominacion")
     private String denominacion;
     @Column(name = "telefono")
