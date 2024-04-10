@@ -24,6 +24,11 @@ public class EmpresaController extends BaseControllerImpl<Empresa, EmpresaServic
         try {
             List<Empresa> empresas = empresaServicio.buscarTodas();
             model.addAttribute("empresas", empresas);
+
+            // Imprimir atributos de cada empresa
+            for (Empresa empresa : empresas) {
+                System.out.println("Denominación: " + empresa.getDenominacion());
+            }
             return "index";
         } catch (Exception e) {
             return "error";
@@ -35,6 +40,7 @@ public class EmpresaController extends BaseControllerImpl<Empresa, EmpresaServic
         try {
             Empresa empresa = empresaServicio.buscarPorId(id);
             model.addAttribute("empresa", empresa);
+            System.out.println(empresa.getHorarioAtencion());
             return "home";
         } catch (Exception e) {
             return "error";
