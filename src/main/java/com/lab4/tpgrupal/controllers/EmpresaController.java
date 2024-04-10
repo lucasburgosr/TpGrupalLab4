@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -24,6 +25,17 @@ public class EmpresaController extends BaseControllerImpl<Empresa, EmpresaServic
             List<Empresa> empresas = empresaServicio.buscarTodas();
             model.addAttribute("empresas", empresas);
             return "index";
+        } catch (Exception e) {
+            return "error";
+        }
+    }
+
+    @GetMapping("/home/{id}")
+    public String mostrarHome(@PathVariable Integer id, Model model) {
+        try {
+            Empresa empresa = empresaServicio.buscarPorId(id);
+            model.addAttribute("empresa", empresa);
+            return "home";
         } catch (Exception e) {
             return "error";
         }

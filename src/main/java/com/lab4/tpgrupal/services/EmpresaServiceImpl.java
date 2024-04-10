@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class EmpresaServiceImpl extends BaseServiceImpl<Empresa, Integer> implements EmpresaService {
 
     @Autowired
-    private EmpresaRepository autorRepository;
+    private EmpresaRepository empresaRepository;
 
     public EmpresaServiceImpl(BaseRepository<Empresa, Integer> baseRepository) {
         super(baseRepository);

@@ -8,5 +8,5 @@ import java.util.List;
 @Repository
 public interface NoticiaRepository extends BaseRepository<Noticia, Integer> {
 
-    List<Noticia> findAlFechaPublicacionDesc();
+    //List<Noticia> findAlFechaPublicacionDesc();
 }

@@ -14,5 +14,6 @@ public class NoticiaServiceImpl extends BaseServiceImpl<Noticia, Integer> implem
 
     public NoticiaServiceImpl(BaseRepository<Noticia, Integer> baseRepository) {
         super(baseRepository);
+        this.noticiaRepository = noticiaRepository;
     }
 }
