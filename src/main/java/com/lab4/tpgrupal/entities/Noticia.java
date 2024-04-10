@@ -1,4 +1,4 @@
-package com.lab4.tpgrupal.entidades;
+package com.lab4.tpgrupal.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -1,9 +1,8 @@
-package com.lab4.tpgrupal.controladores;
+package com.lab4.tpgrupal.controllers;
 
-import com.lab4.tpgrupal.entidades.Empresa;
-import com.lab4.tpgrupal.servicios.EmpresaServicioImpl;
+import com.lab4.tpgrupal.entities.Empresa;
+import com.lab4.tpgrupal.services.EmpresaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,10 +14,10 @@ import java.util.List;
 @Controller
 @CrossOrigin(origins = "*")
 @RequestMapping(path = "/empresas")
-public class EmpresaControlador extends BaseControladorImpl<Empresa, EmpresaServicioImpl> {
+public class EmpresaController extends BaseControllerImpl<Empresa, EmpresaServiceImpl> {
 
     @Autowired
-    private EmpresaServicioImpl empresaServicio;
+    private EmpresaServiceImpl empresaServicio;
     @GetMapping("/listaEmpresas")
     public String mostrarTodasLasEmpresas(Model model) {
         try {

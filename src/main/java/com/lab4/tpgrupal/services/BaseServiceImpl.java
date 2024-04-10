@@ -1,18 +1,18 @@
-package com.lab4.tpgrupal.servicios;
+package com.lab4.tpgrupal.services;
 
-import com.lab4.tpgrupal.entidades.Base;
-import com.lab4.tpgrupal.repositorios.BaseRepositorio;
+import com.lab4.tpgrupal.entities.Base;
+import com.lab4.tpgrupal.repositories.BaseRepository;
 import jakarta.transaction.Transactional;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class BaseServicioImpl<E extends Base, ID extends Serializable> implements BaseServicio<E, ID> {
+public abstract class BaseServiceImpl<E extends Base, ID extends Serializable> implements BaseService<E, ID> {
 
-    protected BaseRepositorio<E, ID> baseRepository;
+    protected BaseRepository<E, ID> baseRepository;
 
-    public BaseServicioImpl(BaseRepositorio<E, ID> baseRepository){
+    public BaseServiceImpl(BaseRepository<E, ID> baseRepository){
         this.baseRepository = baseRepository;
     }
 

@@ -1,13 +1,13 @@
-package com.lab4.tpgrupal.controladores;
+package com.lab4.tpgrupal.controllers;
 
-import com.lab4.tpgrupal.entidades.Base;
-import com.lab4.tpgrupal.servicios.BaseServicioImpl;
+import com.lab4.tpgrupal.entities.Base;
+import com.lab4.tpgrupal.services.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-public abstract class BaseControladorImpl<E extends Base, S extends BaseServicioImpl<E, Integer>> implements BaseControlador<E, Integer>  {
+public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceImpl<E, Integer>> implements BaseController<E, Integer> {
 
     @Autowired
     protected S servicio;
