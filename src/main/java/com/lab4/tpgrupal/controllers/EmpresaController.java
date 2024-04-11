@@ -3,9 +3,12 @@ package com.lab4.tpgrupal.controllers;
 import com.lab4.tpgrupal.entities.Empresa;
 import com.lab4.tpgrupal.services.EmpresaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -45,14 +48,29 @@ public class EmpresaController extends BaseControllerImpl<Empresa, EmpresaServic
         }
     }
 
-    @GetMapping("/agregarEmpresa")
-    public String vistaAgregarEmpresa() {
+    @GetMapping("/agregar")
+    public String mostrarFormularioAgregar(Model model) {
+        model.addAttribute("empresa", new Empresa()); // Agregar un objeto Empresa vacío al modelo
+        return "agregarEmpresa"; // Devolver el nombre de la vista para mostrar
+    }
+
+
+
+
+    @PostMapping("/agregar")
+    public String agregarEmpresa(@ModelAttribute Empresa empresa, Model model) {
         try {
-            return "agregarEmpresa";
+            empresaServicio.crear(empresa); // Guarda la nueva empresa en la base de datos
+            List<Empresa> empresas = empresaServicio.buscarTodas(); // Obtén la lista actualizada de empresas
+            model.addAttribute("empresas", empresas); // Agrega la lista de empresas al modelo para mostrarlas en la vista
+            System.out.println(empresa.getDenominacion());
+            return "index"; // Redirige a la página principal
         } catch (Exception e) {
+            // Manejo de errores
             return "error";
         }
     }
+
 
 
 
