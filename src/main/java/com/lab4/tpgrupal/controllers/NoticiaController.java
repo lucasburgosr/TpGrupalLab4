@@ -3,6 +3,7 @@ package com.lab4.tpgrupal.controllers;
 
 import com.lab4.tpgrupal.entities.Empresa;
 import com.lab4.tpgrupal.entities.Noticia;
+import com.lab4.tpgrupal.services.EmpresaServiceImpl;
 import com.lab4.tpgrupal.services.NoticiaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -10,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.Base64;
 import java.util.List;
@@ -21,6 +25,9 @@ public class NoticiaController extends BaseControllerImpl<Noticia, NoticiaServic
 
     @Autowired
     NoticiaServiceImpl noticiaService;
+
+    @Autowired
+    EmpresaServiceImpl empresaService;
 
     @GetMapping("/buscador")
     public ModelAndView mostrarNoticias() {
@@ -69,16 +76,18 @@ public class NoticiaController extends BaseControllerImpl<Noticia, NoticiaServic
 
 
 
-    @PostMapping("/agregar")
-    public String agregarNoticia(@ModelAttribute Noticia noticia, Model model) {
+    @PostMapping("/detalle")
+    public ModelAndView agregarNoticia(@ModelAttribute Noticia noticia, Model model) {
         try {
             noticiaService.crear(noticia);
-            List<Noticia> noticias = noticiaService.buscarTodas();
-            model.addAttribute("noticias", noticias);
             System.out.println(noticia.getTituloNoticia());
-            return "buscador";
+            Empresa empresa = noticia.getEmpresa();
+            ModelAndView modelAndView = new ModelAndView("detalle"); // Nombre de la vista
+            modelAndView.addObject("noticia", noticia);
+            modelAndView.addObject("empresa", empresa);
+            return modelAndView;
         } catch (Exception e) {
-            return "error";
+            return new ModelAndView("error");
         }
     }
 

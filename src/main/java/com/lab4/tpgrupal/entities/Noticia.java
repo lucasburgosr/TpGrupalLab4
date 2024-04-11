@@ -29,7 +29,7 @@ public class Noticia extends Base{
     private char publicada;
     @Column(name = "fechaPublicacion")
     private LocalDateTime fechaPublicacion;
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_empresa")
     private Empresa empresa;
 

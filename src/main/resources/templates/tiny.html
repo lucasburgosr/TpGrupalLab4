@@ -87,16 +87,17 @@
     <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css">
 </head>
 <body>
-<form action="/noticias/agregar" method="post" enctype="multipart/form-data">
+<form action="/noticias/detalle" method="post" enctype="multipart/form-data">
     <label for="titulo">Titulo:</label><br>
     <input type="text" id="titulo" name="tituloNoticia"><br>
     <label for="resumen">Resumen:</label><br>
     <input type="text" id="resumen" name="resumenNoticia"><br>
-    <label for="imagen">Imagen:</label><br>
-    <input type="file" id="imagen" name="imagen"><br>
+    <!--<label for="imagen">Imagen:</label><br>
+    <input type="file" id="imagen" name="imagenNoticia"><br>-->
     <label for="editorHtml">Contenido de la noticia:</label>
-    <textarea id="editorHtml" name="contenido"></textarea>
+    <textarea id="editorHtml" name="contenidoHtml"></textarea>
     <button type="button" onclick="verHTML()">VER HTML</button>
+    <input type="hidden" id="empresa" name="empresa" th:value="${empresaId}">
     <button type="submit">Agregar Noticia</button>
 </form>
 
