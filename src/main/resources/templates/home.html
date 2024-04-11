@@ -65,9 +65,9 @@
 					  <a href="home.html">INICIO</a>
 					</li>
 					<li style="list-style: none;">
-					  <a href="./">LISTA EMPRESAS</a>
+					  <a href="index.html">LISTA EMPRESAS</a>
 					</li>
-				  </ul>                           
+				  </ul>
 				</div>
 			</nav>
 			<form class="search-form" action="buscador.html" method="GET" accept-charset="utf-8">
@@ -77,10 +77,10 @@
 			  </label>
 			  <button class="search-form_submit fa-search" type="submit"></button>
 			</form>
-             
+
         </div>
 
-      </div>  
+      </div>
 
     </header>
 
@@ -104,7 +104,7 @@
                       Resumen
                     </p>
                     <a href="detalle.html" class="btn-link fa-angle-right"></a>
-                  </div>  
+                  </div>
                 </div>
               </div>
             </div>
@@ -119,7 +119,7 @@
                       Resumen
                     </p>
                     <a href="#" class="btn-link hov_prime fa-angle-right"></a>
-                  </div>  
+                  </div>
                 </div>
               </div>
             </div>
@@ -134,7 +134,7 @@
                       Resumen
                     </p>
                     <a href="#" class="btn-link fa-angle-right"></a>
-                  </div>  
+                  </div>
                 </div>
               </div>
             </div>
@@ -149,12 +149,12 @@
              <div class="jumbotron">
                <em>
                  <!-- Enlace a la página de detalle de la noticia -->
-                 <a th:href="@{'detalle.html?id=' + ${noticia.id}}" th:text="${noticia.tituloNoticia}">Titulo Noticia</a>
+                 <a th:href="@{'detalle.html/' + ${noticia.id}}" th:text="${noticia.tituloNoticia}">Titulo Noticia</a>
                </em>
                <div class="wrap">
                  <p th:text="${noticia.resumenNoticia}">Resumen</p>
                  <!-- Enlace al detalle de la noticia -->
-                 <a th:href="@{'detalle.html?id=' + ${noticia.id}}" class="btn-link fa-angle-right"></a>
+                 <a th:href="@{'detalle.html/' + ${noticia.id}}" class="btn-link fa-angle-right"></a>
                </div>
              </div>
            </div>
