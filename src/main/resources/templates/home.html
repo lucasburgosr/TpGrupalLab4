@@ -62,11 +62,14 @@
 				<div class="">  
 				  <ul class="nav navbar-nav sf-menu sf-js-enabled sf-arrows" data-type="navbar">
 					<li style="list-style: none;" class="active">
-					  <a href="home.html">INICIO</a>
+					  <a th:href="@{${empresa.id}}">INICIO</a>
 					</li>
 					<li style="list-style: none;">
-					  <a href="index.html">LISTA EMPRESAS</a>
+                      <a th:href="@{/empresas/listaEmpresas}" class="btn btn-secondary">LISTA EMPRESAS</a>
 					</li>
+                    <li style="list-style: none;">
+                      <a th:href="@{${empresa.id}+'/tiny.html'} " class="btn btn-secondary">TINY</a>
+                    </li>
 				  </ul>
 				</div>
 			</nav>
@@ -77,69 +80,13 @@
 			  </label>
 			  <button class="search-form_submit fa-search" type="submit"></button>
 			</form>
-
         </div>
-
       </div>
-
     </header>
-
   <!--========================================================
                             CONTENT
   =========================================================-->
-
  <main>
-
-     <!-- <section class="well well1 well1_ins1">
-        <div class="camera_container">
-          <div id="camera" class="camera_wrap">
-            <div data-src="images/page-1_slide1.jpg">
-              <div class="camera_caption fadeIn">
-                <div class="jumbotron jumbotron1">
-                  <em>
-                    <a href="detalle.html">Titulo Noticia</a>
-                  </em>
-                  <div class="wrap">
-                    <p>
-                      Resumen
-                    </p>
-                    <a href="detalle.html" class="btn-link fa-angle-right"></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div data-src="images/page-1_slide2.jpg">
-              <div class="camera_caption fadeIn">
-                <div class="jumbotron jumbotron2">
-                  <em>
-                    Titulo Noticia
-                  </em>
-                  <div class="wrap">
-                    <p>
-                      Resumen
-                    </p>
-                    <a href="#" class="btn-link hov_prime fa-angle-right"></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div data-src="images/page-1_slide3.jpg">
-              <div class="camera_caption fadeIn">
-                <div class="jumbotron">
-                  <em>
-                    Titulo Noticia
-                  </em>
-                  <div class="wrap">
-                    <p>
-                      Resumen
-                    </p>
-                    <a href="#" class="btn-link fa-angle-right"></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>-->
    <section class="well well1 well1_ins1">
      <div class="camera_container">
        <div id="camera" class="camera_wrap">
@@ -149,12 +96,12 @@
              <div class="jumbotron">
                <em>
                  <!-- Enlace a la página de detalle de la noticia -->
-                 <a th:href="@{'detalle.html/' + ${noticia.id}}" th:text="${noticia.tituloNoticia}">Titulo Noticia</a>
+                 <a th:href="@{'detalle/' + ${noticia.id}}" th:text="${noticia.tituloNoticia}">Titulo Noticia</a>
                </em>
                <div class="wrap">
                  <p th:text="${noticia.resumenNoticia}">Resumen</p>
                  <!-- Enlace al detalle de la noticia -->
-                 <a th:href="@{'detalle.html/' + ${noticia.id}}" class="btn-link fa-angle-right"></a>
+                 <a th:href="@{'detalle/' + ${noticia.id}}" class="btn-link fa-angle-right"></a>
                </div>
              </div>
            </div>
