@@ -1,6 +1,7 @@
 package com.lab4.tpgrupal.controllers;
 
 
+import com.lab4.tpgrupal.entities.Empresa;
 import com.lab4.tpgrupal.entities.Noticia;
 import com.lab4.tpgrupal.services.NoticiaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,23 +50,25 @@ public class NoticiaController extends BaseControllerImpl<Noticia, NoticiaServic
         }
     }
 
-    @PostMapping("/agregarNoticia")
-    public String agregarNoticia(@RequestParam String tituloNoticia, @RequestParam String resumenNoticia, @RequestParam String contenido, @RequestParam MultipartFile imagen) {
+    @GetMapping("/agregar")
+    public String mostrarFormularioAgregar(Model model) {
         try {
-            Noticia noticia = new Noticia();
-            noticia.setTituloNoticia(tituloNoticia);
-            noticia.setResumenNoticia(resumenNoticia);
-            noticia.setContenidoHtml(contenido);
-            noticia.setFechaPublicacion(LocalDateTime.now());
+            model.addAttribute("noticia", new Noticia()); // Agregar un objeto Empresa vacío al modelo
+            return "tiny"; // Devolver el nombre de la vista para mostrar
+        } catch (Exception e) {
+            return "error";
+        }
 
-            byte[] bytesImagen = imagen.getBytes();
-            String imagenBase64 = Base64.getEncoder().encodeToString(bytesImagen);
+    }
 
-            // Guardar la imagen como una cadena en la base de datos
-            noticia.setImagenNoticia(imagenBase64);
-
+    @PostMapping("/agregar")
+    public String agregarNoticia(@ModelAttribute Noticia noticia, Model model) {
+        try {
             noticiaService.crear(noticia);
-            return "redirect:/noticias/buscador";
+            List<Noticia> noticias = noticiaService.buscarTodas();
+            model.addAttribute("noticias", noticias);
+            System.out.println(noticia.getTituloNoticia());
+            return "buscador";
         } catch (Exception e) {
             return "error";
         }
