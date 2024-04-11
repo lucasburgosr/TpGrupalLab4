@@ -5,10 +5,7 @@ import com.lab4.tpgrupal.services.EmpresaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,6 +16,7 @@ public class EmpresaController extends BaseControllerImpl<Empresa, EmpresaServic
 
     @Autowired
     private EmpresaServiceImpl empresaServicio;
+
     @GetMapping("/listaEmpresas")
     public String mostrarTodasLasEmpresas(Model model) {
         try {
@@ -46,4 +44,28 @@ public class EmpresaController extends BaseControllerImpl<Empresa, EmpresaServic
             return "error";
         }
     }
+
+    @GetMapping("/agregarEmpresa")
+    public String vistaAgregarEmpresa() {
+        try {
+            return "agregarEmpresa";
+        } catch (Exception e) {
+            return "error";
+        }
+    }
+
+    @PostMapping("")
+    public String agregarEmpresa(@ModelAttribute Empresa empresa) {
+        try {
+            empresaServicio.crear(empresa);
+
+            // Retorna el nombre de la vista para redirigir después de agregar la empresa
+            return "redirect:/empresas";
+        } catch (Exception e) {
+            // Manejo de errores
+            return "error";
+        }
+    }
+
+
 }

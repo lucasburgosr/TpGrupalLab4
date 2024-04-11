@@ -21,8 +21,11 @@
 <head>
     <title>Lista de Empresas</title> <!-- Título de la página -->
 </head>
-<body>
+<body >
 <h1>Listado de Empresas</h1> <!-- Encabezado principal de la página -->
+<!-- Agregar empresa -->
+<a th:href="@{agregarEmpresa}">Agregar Empresa</a>
+
 <table width="50%" > <!-- Tabla para mostrar el listado de empresas -->
     <thead>
     <tr> <!-- Fila de encabezado de la tabla -->
@@ -30,14 +33,14 @@
         <th>VER PAGINA</th> <!-- Celda de encabezado para el enlace a la página home.html -->
     </tr>
     </thead>
-    <tbody>
+    <tbody  >
     <!-- Iteración sobre la lista de empresas recibida desde el backend -->
     <tr th:each="empresa : ${empresas}">
         <!-- Celda para mostrar la denominación de la empresa -->
         <td th:text="${empresa.denominacion}">Denominacion</td>
         <!-- Celda para el enlace a la página home.html con el ID de la empresa como parámetro -->
         <td>
-            <a th:href="@{'home.html?id=' + ${empresa.id}}">Ver Pagina Home</a>
+            <a th:href="@{'home/' + ${empresa.id}}">Ver Pagina Home</a>
         </td>
     </tr>
     </tbody>

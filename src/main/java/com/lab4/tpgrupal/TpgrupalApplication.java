@@ -14,7 +14,7 @@ public class TpgrupalApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TpgrupalApplication.class, args);
-
+		System.out.println("Programa ejecutandose en: http://localhost:8080/empresas/listaEmpresas");
 
 	}
 
