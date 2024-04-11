@@ -68,7 +68,9 @@
                       <a th:href="@{/empresas/listaEmpresas}" class="btn btn-secondary">LISTA EMPRESAS</a>
 					</li>
                     <li style="list-style: none;">
-                      <a th:href="@{${empresa.id}+'/tiny.html'} " class="btn btn-secondary">TINY</a>
+                      <!-- Botón para agregar noticia -->
+                      <a th:href="@{'/noticias/agregar?id=' + ${empresa.id}}" class="btn btn-secondary">Agregar Noticia</a>
+
                     </li>
 				  </ul>
 				</div>

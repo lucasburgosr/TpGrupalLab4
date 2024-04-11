@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDateTime;
 import java.util.Base64;
@@ -51,15 +52,19 @@ public class NoticiaController extends BaseControllerImpl<Noticia, NoticiaServic
     }
 
     @GetMapping("/agregar")
-    public String mostrarFormularioAgregar(Model model) {
+    public ModelAndView mostrarFormularioAgregar(@RequestParam("id") Integer empresaId) {
         try {
-            model.addAttribute("noticia", new Noticia()); // Agregar un objeto Empresa vacío al modelo
-            return "tiny"; // Devolver el nombre de la vista para mostrar
+            System.out.println(empresaId);
+            ModelAndView modelAndView = new ModelAndView("tiny"); // Nombre de la vista
+            modelAndView.addObject("empresaId", empresaId); // Agregar el ID de la empresa al modelo
+            modelAndView.addObject("noticia", new Noticia()); // Agregar un objeto Noticia vacío al modelo
+            return modelAndView;
         } catch (Exception e) {
-            return "error";
+            return new ModelAndView("error");
         }
-
     }
+
+
 
     @PostMapping("/agregar")
     public String agregarNoticia(@ModelAttribute Noticia noticia, Model model) {
