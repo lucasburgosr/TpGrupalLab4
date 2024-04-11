@@ -23,33 +23,36 @@ public class NoticiaController extends BaseControllerImpl<Noticia, NoticiaServic
     NoticiaServiceImpl noticiaService;
 
     @GetMapping("/buscador")
-    public String mostrarNoticias(Model model) {
+    public ModelAndView mostrarNoticias() {
         try {
             List<Noticia> noticias = noticiaService.buscarTodas();
-            model.addAttribute("noticias", noticias);
+            ModelAndView modelAndView = new ModelAndView("buscador"); // Nombre de la vista
+            modelAndView.addObject("noticias", noticias); // Agregar la lista de noticias al modelo
 
             // Imprimir atributos de cada noticia
             for (Noticia noticia : noticias) {
                 System.out.println("Título noticia: " + noticia.getTituloNoticia());
             }
 
-            return "buscador";
+            return modelAndView;
         } catch (Exception e) {
-            return "error";
+            return new ModelAndView("error");
         }
     }
 
+
     @GetMapping("/detalle/{id}")
-    public String mostrarDetalleNoticia(@PathVariable Integer id, Model model) {
+    public ModelAndView mostrarDetalleNoticia(@PathVariable Integer id) {
         try {
             Noticia noticia = noticiaService.buscarPorId(id);
-            model.addAttribute("noticia", noticia);
-            System.out.println(noticia.getTituloNoticia());
-            return "detalle";
+            ModelAndView modelAndView = new ModelAndView("detalle"); // Nombre de la vista
+            modelAndView.addObject("noticia", noticia); // Agregar la noticia al modelo
+            return modelAndView;
         } catch (Exception e) {
-            return "error";
+            return new ModelAndView("error");
         }
     }
+
 
     @GetMapping("/agregar")
     public ModelAndView mostrarFormularioAgregar(@RequestParam("id") Integer empresaId) {
