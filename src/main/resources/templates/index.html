@@ -9,7 +9,7 @@
 <div class="container mt-4">
     <h1 class="mb-4">Listado de Empresas</h1>
 
-    <a href="agregarEmpresa.html" class="btn btn-primary mb-3">Agregar Empresa</a>
+    <a th:href="@{/empresas/agregarEmpresa}" class="btn btn-primary mb-3">Agregar Empresa</a>
 
     <table class="table table-bordered">
         <thead class="thead-dark">
@@ -22,7 +22,7 @@
         <tr th:each="empresa : ${empresas}">
             <td th:text="${empresa.denominacion}">Denominacion</td>
             <td>
-                <a th:href="@{'home.html/' + ${empresa.id}}" class="btn btn-info btn-sm">Ver Pagina</a>
+                <a th:href="@{'home/' + ${empresa.id}}" class="btn btn-info btn-sm">Ver Pagina</a>
                 <!-- Agregar más acciones si es necesario -->
             </td>
         </tr>

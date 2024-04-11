@@ -49,7 +49,7 @@ public class NoticiaController extends BaseControllerImpl<Noticia, NoticiaServic
         }
     }
 
-    @PostMapping("/")
+    @PostMapping("/agregarNoticia")
     public String agregarNoticia(@RequestParam String tituloNoticia, @RequestParam String resumenNoticia, @RequestParam String contenido, @RequestParam MultipartFile imagen) {
         try {
             Noticia noticia = new Noticia();
@@ -71,7 +71,7 @@ public class NoticiaController extends BaseControllerImpl<Noticia, NoticiaServic
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/eliminar/{id}")
     public String eliminarNoticia(@PathVariable Integer id) {
         try {
             noticiaService.eliminar(id);

@@ -54,18 +54,7 @@ public class EmpresaController extends BaseControllerImpl<Empresa, EmpresaServic
         }
     }
 
-    @PostMapping("")
-    public String agregarEmpresa(@ModelAttribute Empresa empresa) {
-        try {
-            empresaServicio.crear(empresa);
 
-            // Retorna el nombre de la vista para redirigir después de agregar la empresa
-            return "redirect:/empresas";
-        } catch (Exception e) {
-            // Manejo de errores
-            return "error";
-        }
-    }
 
 
 }
