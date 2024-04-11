@@ -208,10 +208,9 @@
 
 				  <!-- Iterar sobre los resultados de búsqueda -->
 				  <div class="row offs2">
-					  <table th:width="90%" th:align="center">
+					  <table th:align="center">
 						  <tbody>
-						  <!-- Aquí va la lógica de Thymeleaf para iterar sobre los resultados de búsqueda -->
-						  <tr th:each="noticia : ${resultados}">
+						  <tr th:each="noticia : ${noticias}">
 							  <td>
 								  <!-- Enlace a la página de detalle de la noticia -->
 								  <a th:href="@{'detalle.html?id=' + ${noticia.id}}">
@@ -226,12 +225,13 @@
 								  <div class="verOcultar">
 									  <!-- Mostrar el resumen de la noticia -->
 									  <span th:text="${noticia.resumenNoticia}"></span>
-									  <a th:href="@{'detalle.html?id=' + ${noticia.id}}" style="color: blue">Leer Más - <span th:text="${#dates.format(noticia.fechaPublicacion, 'yyyy-MM-dd')}"></span></a>
+									  <a th:href="@{'detalle.html?id=' + ${noticia.id}}" style="color: blue">Leer Más - <span></span></a>
 								  </div>
 							  </td>
 						  </tr>
 						  </tbody>
 					  </table>
+
 					  <hr>
 				  </div>
 			  </div>

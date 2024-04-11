@@ -7,6 +7,5 @@ import java.util.List;
 
 @Repository
 public interface NoticiaRepository extends BaseRepository<Noticia, Integer> {
-
-    //List<Noticia> findAlFechaPublicacionDesc();
+    List<Noticia> findByTituloNoticiaContainingIgnoreCaseOrResumenNoticiaContainingIgnoreCaseOrContenidoHtmlContainingIgnoreCase(String palabraClave, String palabraClave2, String palabraClave3);
 }

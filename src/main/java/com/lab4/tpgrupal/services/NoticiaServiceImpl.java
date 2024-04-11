@@ -6,6 +6,8 @@ import com.lab4.tpgrupal.repositories.NoticiaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class NoticiaServiceImpl extends BaseServiceImpl<Noticia, Integer> implements NoticiaService {
 
@@ -15,5 +17,9 @@ public class NoticiaServiceImpl extends BaseServiceImpl<Noticia, Integer> implem
     public NoticiaServiceImpl(BaseRepository<Noticia, Integer> baseRepository) {
         super(baseRepository);
         this.noticiaRepository = noticiaRepository;
+    }
+
+    public List<Noticia> buscarNoticiasPorPalabraClave(String palabraClave) {
+        return noticiaRepository.findByTituloNoticiaContainingIgnoreCaseOrResumenNoticiaContainingIgnoreCaseOrContenidoHtmlContainingIgnoreCase(palabraClave, palabraClave, palabraClave);
     }
 }

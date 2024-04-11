@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Base64;
 import java.util.List;
 
@@ -28,25 +30,6 @@ public class NoticiaController extends BaseControllerImpl<Noticia, NoticiaServic
 
     @Autowired
     EmpresaServiceImpl empresaService;
-
-    @GetMapping("/buscador")
-    public ModelAndView mostrarNoticias() {
-        try {
-            List<Noticia> noticias = noticiaService.buscarTodas();
-            ModelAndView modelAndView = new ModelAndView("buscador"); // Nombre de la vista
-            modelAndView.addObject("noticias", noticias); // Agregar la lista de noticias al modelo
-
-            // Imprimir atributos de cada noticia
-            for (Noticia noticia : noticias) {
-                System.out.println("Título noticia: " + noticia.getTituloNoticia());
-            }
-
-            return modelAndView;
-        } catch (Exception e) {
-            return new ModelAndView("error");
-        }
-    }
-
 
     @GetMapping("/detalle/{id}")
     public ModelAndView mostrarDetalleNoticia(@PathVariable Integer id) {
@@ -70,21 +53,44 @@ public class NoticiaController extends BaseControllerImpl<Noticia, NoticiaServic
             modelAndView.addObject("noticia", new Noticia()); // Agregar un objeto Noticia vacío al modelo
             return modelAndView;
         } catch (Exception e) {
-            return new ModelAndView("error");
+            return new ModelAndView("404");
         }
     }
 
 
 
     @PostMapping("/detalle")
-    public ModelAndView agregarNoticia(@ModelAttribute Noticia noticia, Model model) {
+    public ModelAndView agregarNoticia(@ModelAttribute Noticia noticia, @RequestParam("imagen") MultipartFile imagen) {
         try {
+
+            // Establecer la fecha de publicación truncada a solo la fecha
+            noticia.setFechaPublicacion(LocalDateTime.now().truncatedTo(ChronoUnit.DAYS));
+
+            // Procesar la imagen
+            noticia.setImagenNoticia(imagen.getBytes());
+
+            // Crear la noticia
             noticiaService.crear(noticia);
-            System.out.println(noticia.getTituloNoticia());
+
+            // Obtener la empresa de la noticia
             Empresa empresa = noticia.getEmpresa();
-            ModelAndView modelAndView = new ModelAndView("detalle"); // Nombre de la vista
+
+            ModelAndView modelAndView = new ModelAndView("detalle");
             modelAndView.addObject("noticia", noticia);
             modelAndView.addObject("empresa", empresa);
+            return modelAndView;
+        } catch (Exception e) {
+            // Manejar la excepción en caso de error de entrada/salida al procesar la imagen
+            return new ModelAndView("error");
+        }
+    }
+
+    @GetMapping("/buscador")
+    public ModelAndView buscarNoticias(@RequestParam("palabraClave") String palabraClave) {
+        try{
+            List<Noticia> noticias = noticiaService.buscarNoticiasPorPalabraClave(palabraClave);
+            ModelAndView modelAndView = new ModelAndView("buscador"); // Nombre de la vista para mostrar los resultados de la búsqueda
+            modelAndView.addObject("noticias", noticias);
             return modelAndView;
         } catch (Exception e) {
             return new ModelAndView("error");

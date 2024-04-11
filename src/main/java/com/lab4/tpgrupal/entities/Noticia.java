@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
 
 @Getter
@@ -15,14 +14,15 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 @Table(name = "noticia")
-public class Noticia extends Base{
+public class Noticia extends Base {
 
     @Column(name = "titulo")
     private String tituloNoticia;
     @Column(name = "resumen")
     private String resumenNoticia;
     @Column(name = "imagen")
-    private String imagenNoticia;
+    @Lob
+    private byte[] imagenNoticia;
     @Column(name = "contenidoHTML")
     private String contenidoHtml;
     @Column(name = "publicada")
