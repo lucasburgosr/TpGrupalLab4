@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Date;
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -24,6 +27,8 @@ public class Noticia extends Base{
     private String contenidoHtml;
     @Column(name = "publicada")
     private char publicada;
+    @Column(name = "fechaPublicacion")
+    private LocalDateTime fechaPublicacion;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_empresa")
     private Empresa empresa;

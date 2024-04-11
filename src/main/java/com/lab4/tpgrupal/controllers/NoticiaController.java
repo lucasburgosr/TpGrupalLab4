@@ -6,7 +6,10 @@ import com.lab4.tpgrupal.services.NoticiaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDateTime;
+import java.util.Base64;
 import java.util.List;
 
 @RestController
@@ -16,7 +19,7 @@ public class NoticiaController extends BaseControllerImpl<Noticia, NoticiaServic
 
     @Autowired
     NoticiaServiceImpl noticiaService;
-    
+
     @GetMapping("/buscador")
     public String mostrarNoticias(Model model) {
         try {
@@ -27,7 +30,7 @@ public class NoticiaController extends BaseControllerImpl<Noticia, NoticiaServic
             for (Noticia noticia : noticias) {
                 System.out.println("Título noticia: " + noticia.getTituloNoticia());
             }
-            
+
             return "buscador";
         } catch (Exception e) {
             return "error";
@@ -47,12 +50,33 @@ public class NoticiaController extends BaseControllerImpl<Noticia, NoticiaServic
     }
 
     @PostMapping("/")
-    public String agregarnoticia(@ModelAttribute Noticia noticia) {
+    public String agregarNoticia(@RequestParam String tituloNoticia, @RequestParam String resumenNoticia, @RequestParam String contenido, @RequestParam MultipartFile imagen) {
         try {
+            Noticia noticia = new Noticia();
+            noticia.setTituloNoticia(tituloNoticia);
+            noticia.setResumenNoticia(resumenNoticia);
+            noticia.setContenidoHtml(contenido);
+            noticia.setFechaPublicacion(LocalDateTime.now());
+
+            byte[] bytesImagen = imagen.getBytes();
+            String imagenBase64 = Base64.getEncoder().encodeToString(bytesImagen);
+
+            // Guardar la imagen como una cadena en la base de datos
+            noticia.setImagenNoticia(imagenBase64);
+
             noticiaService.crear(noticia);
             return "redirect:/noticias/buscador";
         } catch (Exception e) {
+            return "error";
+        }
+    }
 
+    @DeleteMapping("/{id}")
+    public String eliminarNoticia(@PathVariable Integer id) {
+        try {
+            noticiaService.eliminar(id);
+            return "redirect:/noticias/buscador";
+        } catch (Exception e) {
             return "error";
         }
     }
