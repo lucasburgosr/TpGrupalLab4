@@ -53,7 +53,7 @@
         <div class="help-box text-right">
           <p>Telefono</p>
           <a th:href="@{/empresa.telefono}"  th:text="${empresa.getTelefono()}"></a>
-          <small th:href="@{/empresa.horarioAtencion}"  th:text="${empresa.getHorarioAtencion()}"><span>Horario:</span></small>
+          <small th:href="@{/empresa.horarioAtencion}" th:text="${empresa.getHorarioAtencion()}"><span>Horario:</span> </small>
         </div>
       </div>
 
@@ -77,6 +77,9 @@
 				  </ul>
 				</div>
 			</nav>
+          <form  th:action="@{'/empresas/eliminar?id='${empresa.id}}">
+            <button type="submit" class="btn btn-danger">Eliminar Empresa</button>
+          </form>
 			<form class="search-form" action="/noticias/buscador" method="GET" accept-charset="utf-8">
 			  <label class="search-form_label">
 				<input class="search-form_input" type="text" name="palabraClave" autocomplete="off" placeholder="Ingrese Texto"/>
