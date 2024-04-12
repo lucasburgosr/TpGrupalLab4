@@ -64,8 +64,17 @@
 						  <a th:href="@{'/empresas/home/' + ${empresa.id}}" class="btn btn-info btn-sm">VOLVER</a>
 					  </li>
 					  <li style="list-style: none;">
-						  <a th:href="@{/empresas/listaEmpresas}" class="btn btn-secondary">LISTA EMPRESAS</a>
-
+						  <a th:href="@{/empresas/listaEmpresas}" class="btn btn-info">LISTA EMPRESAS</a>
+					  </li>
+					  <li style="list-style: none;">
+						  <!-- Botón para agregar noticia -->
+						  <a th:href="@{'/noticias/agregar?id=' + ${empresa.id}}" class="btn btn-info">Agrega Noticia</a>
+					  </li>
+					  <li style="list-style: none;">
+						  <a th:action="@{'/empresas/eliminar?id='${empresa.id}}" type="submit" class="btn btn-danger">Eliminar</a>
+					  </li>
+					  <li style="list-style: none;">
+						  <a th:action="@{'/empresas/actualizar?id='${empresa.id}}" type="submit" class="btn btn-info">Actualizar</a>
 					  </li>
 				  </ul>                           
 				</div>
