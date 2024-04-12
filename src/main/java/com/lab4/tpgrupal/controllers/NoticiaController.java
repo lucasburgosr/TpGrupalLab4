@@ -156,4 +156,11 @@ public class NoticiaController extends BaseControllerImpl<Noticia, NoticiaServic
             return "error";
         }
     }
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String home(Model model) {
+        List<Noticia> ultimasNoticias = noticiaService.obtenerUltimas5Noticias();
+        model.addAttribute("ultimasNoticias", ultimasNoticias);
+        return "home";
+    }
 }

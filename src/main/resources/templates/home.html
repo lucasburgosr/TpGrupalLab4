@@ -21,6 +21,10 @@
     <script th:src="@{/js/rd-smoothscroll.min.js}"></script>
 
 
+      <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css}" rel="stylesheet">
+      <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css}" rel="stylesheet">
+
+
     <!--[if lt IE 9]>
     <div style=' clear: both; text-align:center; position: relative;'>
       <a th:href="@{http://windows.microsoft.com/en-US/internet-explorer/..}">Enlace a Internet Explorer</a>
@@ -100,8 +104,8 @@
      <section class="well well1 well1_ins1">
          <div class="camera_container">
              <div id="camera" class="camera_wrap">
-                 <!-- Iterar sobre las últimas noticias -->
-                 <th:block th:each="noticia : ${noticias}">
+                 <!-- Iterar sobre las últimas 5 noticias -->
+                 <th:block th:each="noticia : ${ultimas5Noticias}">
                      <div th:data-src="${noticia.imagenNoticia}">
                          <div class="camera_caption fadeIn">
                              <div class="jumbotron">
@@ -122,14 +126,29 @@
          </div>
      </section>
 
+     <script th:inline="javascript">
+         $(document).ready(function(){
+             $('#camera').camera({
+                 height: 'auto',
+                 loader: 'none',
+                 pagination: true,
+                 thumbnails: false,
+                 hover: false,
+                 playPause: false,
+                 navigation: true,
+                 navigationHover: false,
+                 mobileNavHover: false,
+                 fx: 'simpleFade'
+             });
+         });
+     </script>
+
       <section class="well well2 wow fadeIn  bg1" data-wow-duration='3s'>
         <div class="container">
         <h2 class="txt-pr">Quienes Somos</h2>
           <div class="row">
             <div class="col">
-              <p  th:text="${empresa.getQuienesSomos()} "style="text-align:justify">
-                Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt. Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              </p>
+              <p  th:text="${empresa.getQuienesSomos()} "style="text-align:justify"></p>
             </div>
           </div>
         </div>

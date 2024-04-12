@@ -70,13 +70,13 @@
 				  </ul>
 				</div>
 			</nav>
-			<form class="search-form" action="buscador.html" method="GET" accept-charset="utf-8">
-			  <label class="search-form_label">
-				<input class="search-form_input" type="text" name="buscar" autocomplete="off" placeholder="Ingrese Texto"/>
-				<span class="search-form_liveout"></span>
-			  </label>
-			  <button class="search-form_submit fa-search" type="submit"></button>
-			</form>
+            <form class="search-form" action="/noticias/buscador" method="GET" accept-charset="utf-8">
+                <label class="search-form_label">
+                    <input class="search-form_input" type="text" name="palabraClave" autocomplete="off" placeholder="Ingrese Texto"/>
+                    <span class="search-form_liveout"></span>
+                </label>
+                <button class="search-form_submit fa-search" type="submit"></button>
+            </form>
              
         </div>
 
@@ -112,7 +112,7 @@
                       <div class="col-lg-12">
                           <dl class="terms-list">
                               <dt>
-                                  Resumen de la noticia
+
                               </dt>
                               <hr>
                               <dd th:text="${noticia.resumenNoticia}">
@@ -120,7 +120,7 @@
                               </dd>
                               <hr>
                               <dt>
-                                  Contenido HTML
+
                               </dt>
                               <!-- Muestra el contenido HTML de la noticia -->
                               <dd th:utext="${noticia.contenidoHtml}">
