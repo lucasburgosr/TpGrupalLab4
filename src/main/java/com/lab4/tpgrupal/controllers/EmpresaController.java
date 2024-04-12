@@ -73,6 +73,17 @@ public class EmpresaController extends BaseControllerImpl<Empresa, EmpresaServic
     }
 
 
+    @DeleteMapping("/eliminar/{id}")
+    public String eliminarEmpresa(@PathVariable Integer id) {
+        try {
+        empresaServicio.eliminar(id);
+        return "redirect:/empresas/listaEmpresas";
+    } catch (Exception e) {
+        return "error";
+    }
+    }
+
+
 
 
 
