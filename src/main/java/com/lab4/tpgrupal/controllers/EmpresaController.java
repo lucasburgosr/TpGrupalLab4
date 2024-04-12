@@ -53,7 +53,7 @@ public class EmpresaController extends BaseControllerImpl<Empresa, EmpresaServic
 
             return "home";
         } catch (Exception e) {
-            return "error";
+            return "404";
         }
     }
 

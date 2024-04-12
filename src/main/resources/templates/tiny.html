@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -87,7 +87,7 @@
     <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css">
 </head>
 <body>
-<form action="/noticias/detalle" method="post" enctype="multipart/form-data">
+<form th:action="@{/noticias/agregar}" method="post" enctype="multipart/form-data">
     <label for="titulo">Titulo:</label><br>
     <input type="text" id="titulo" name="tituloNoticia"><br>
     <label for="resumen">Resumen:</label><br>
