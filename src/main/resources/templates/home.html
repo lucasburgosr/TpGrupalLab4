@@ -95,7 +95,7 @@
      <div class="camera_container">
        <div id="camera" class="camera_wrap">
          <!-- Iterar sobre las últimas noticias -->
-         <div th:each="noticia : ${ultimasNoticias}" th:data-src="${noticia.imagenNoticia}">
+         <div th:each="noticia : ${noticias}" th:data-src="${noticia.imagenNoticia}">
            <div class="camera_caption fadeIn">
              <div class="jumbotron">
                <em>

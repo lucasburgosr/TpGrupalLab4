@@ -22,4 +22,8 @@ public class NoticiaServiceImpl extends BaseServiceImpl<Noticia, Integer> implem
     public List<Noticia> buscarNoticiasPorPalabraClave(String palabraClave) {
         return noticiaRepository.findByTituloNoticiaContainingIgnoreCaseOrResumenNoticiaContainingIgnoreCaseOrContenidoHtmlContainingIgnoreCase(palabraClave, palabraClave, palabraClave);
     }
+
+    public List<Noticia> buscarPorEmpresa(Integer idEmpresa) {
+        return noticiaRepository.findByEmpresaIdOrderByFechaPublicacionDesc(idEmpresa);
+    }
 }

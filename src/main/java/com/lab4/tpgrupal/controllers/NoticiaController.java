@@ -6,18 +6,12 @@ import com.lab4.tpgrupal.entities.Noticia;
 import com.lab4.tpgrupal.services.EmpresaServiceImpl;
 import com.lab4.tpgrupal.services.NoticiaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Base64;
 import java.util.List;
 
 @RestController
@@ -58,7 +52,6 @@ public class NoticiaController extends BaseControllerImpl<Noticia, NoticiaServic
     }
 
 
-
     @PostMapping("/detalle")
     public ModelAndView agregarNoticia(@ModelAttribute Noticia noticia, @RequestParam("imagen") MultipartFile imagen) {
         try {
@@ -87,7 +80,7 @@ public class NoticiaController extends BaseControllerImpl<Noticia, NoticiaServic
 
     @GetMapping("/buscador")
     public ModelAndView buscarNoticias(@RequestParam("palabraClave") String palabraClave) {
-        try{
+        try {
             List<Noticia> noticias = noticiaService.buscarNoticiasPorPalabraClave(palabraClave);
             ModelAndView modelAndView = new ModelAndView("buscador"); // Nombre de la vista para mostrar los resultados de la búsqueda
             modelAndView.addObject("noticias", noticias);
@@ -96,6 +89,39 @@ public class NoticiaController extends BaseControllerImpl<Noticia, NoticiaServic
             return new ModelAndView("error");
         }
     }
+
+    @GetMapping("/noticias/actualizar/{id}")
+    public ModelAndView mostrarFormularioActualizacion(@PathVariable("id") Integer id) {
+        try {
+            // Obtener la noticia por su ID
+            Noticia noticia = noticiaService.buscarPorId(id);
+            if (noticia == null) {
+                // Manejar el caso en que la noticia no existe
+                return new ModelAndView("error");
+            }
+            // Cargar el formulario de edición con la noticia
+            ModelAndView modelAndView = new ModelAndView("tiny");
+            modelAndView.addObject("noticia", noticia);
+            return modelAndView;
+        } catch (Exception e) {
+            // Manejar cualquier excepción que pueda ocurrir
+            return new ModelAndView("error");
+        }
+    }
+
+    @PostMapping("/noticias/actualizar")
+    public ModelAndView procesarActualizacion(@ModelAttribute Noticia noticia) {
+        try {
+            // Actualizar la noticia en la base de datos
+            noticiaService.actualizar(noticia.getId(), noticia);
+            // Redirigir a la vista de detalle de la noticia actualizada
+            return new ModelAndView("redirect:/noticias/detalle/" + noticia.getId());
+        } catch (Exception e) {
+            // Manejar cualquier excepción que pueda ocurrir
+            return new ModelAndView("error");
+        }
+    }
+
 
     @DeleteMapping("/eliminar/{id}")
     public String eliminarNoticia(@PathVariable Integer id) {

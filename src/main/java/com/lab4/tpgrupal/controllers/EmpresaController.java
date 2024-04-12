@@ -1,7 +1,9 @@
 package com.lab4.tpgrupal.controllers;
 
 import com.lab4.tpgrupal.entities.Empresa;
+import com.lab4.tpgrupal.entities.Noticia;
 import com.lab4.tpgrupal.services.EmpresaServiceImpl;
+import com.lab4.tpgrupal.services.NoticiaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,9 @@ public class EmpresaController extends BaseControllerImpl<Empresa, EmpresaServic
 
     @Autowired
     private EmpresaServiceImpl empresaServicio;
+
+    @Autowired
+    private NoticiaServiceImpl noticiaService;
 
     @GetMapping("/listaEmpresas")
     public String mostrarTodasLasEmpresas(Model model) {
@@ -41,12 +46,17 @@ public class EmpresaController extends BaseControllerImpl<Empresa, EmpresaServic
         try {
             Empresa empresa = empresaServicio.buscarPorId(id);
             model.addAttribute("empresa", empresa);
-            System.out.println(empresa.getHorarioAtencion());
+
+            // Obtener las 5 primeras noticias de la empresa
+            List<Noticia> noticias = noticiaService.buscarPorEmpresa(id);
+            model.addAttribute("noticias", noticias);
+
             return "home";
         } catch (Exception e) {
             return "error";
         }
     }
+
 
     @GetMapping("/agregar")
     public String mostrarFormularioAgregar(Model model) {
