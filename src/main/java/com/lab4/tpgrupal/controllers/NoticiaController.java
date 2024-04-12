@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -74,31 +75,28 @@ public class NoticiaController extends BaseControllerImpl<Noticia, NoticiaServic
 
 
     @PostMapping("/agregar")
-    public String agregarNoticia(@ModelAttribute Noticia noticia, Model model) {
+    public ModelAndView agregarNoticia(@ModelAttribute Noticia noticia) {
+        ModelAndView modelAndView = new ModelAndView();
         try {
-
             // Establecer la fecha de publicación truncada a solo la fecha
             noticia.setFechaPublicacion(LocalDateTime.now().truncatedTo(ChronoUnit.DAYS));
 
             // Crear la noticia
             noticiaService.crear(noticia);
 
-            // Obtener la empresa de la noticia
-            //Empresa empresa = noticia.getEmpresa();
+            // Obtener el ID de la noticia recién creada
+            Integer idNuevaNoticia = noticia.getId();
 
-            List<Noticia> noticias = noticiaService.buscarTodas();
-            model.addAttribute("noticias", noticias);
-            System.out.println(noticia.getTituloNoticia());
-
-            return "detalle/{id}";
-
-
-
+            modelAndView.setViewName("redirect:/noticias/detalle/" + idNuevaNoticia); // Redirigir a la página detalle de la nueva noticia
         } catch (Exception e) {
             // Manejar la excepción en caso de error de entrada/salida al procesar la imagen
-            return "404";
+            modelAndView.setViewName("404");
         }
+        return modelAndView;
     }
+
+
+
 
     @GetMapping("/buscador")
     public ModelAndView buscarNoticias(@RequestParam("palabraClave") String palabraClave) {

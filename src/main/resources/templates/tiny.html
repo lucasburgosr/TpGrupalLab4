@@ -84,10 +84,16 @@
 
 
     </script>
+
+    <script>
+        function mostrarMensaje() {
+            alert("Noticia agregada correctamente");
+        }
+    </script>
     <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css">
 </head>
 <body>
-<form th:action="@{/noticias/agregar}" method="post" enctype="multipart/form-data">
+<form th:action="@{/noticias/agregar}" method="post" th:object="${noticia}" onsubmit="mostrarMensaje()" enctype="multipart/form-data">
     <label for="titulo">Titulo:</label><br>
     <input type="text" id="titulo" name="tituloNoticia"><br>
     <label for="resumen">Resumen:</label><br>
