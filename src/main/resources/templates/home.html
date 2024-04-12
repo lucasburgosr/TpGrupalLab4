@@ -107,12 +107,12 @@
                              <div class="jumbotron">
                                  <em>
                                      <!-- Enlace a la página de detalle de la noticia -->
-                                     <a th:href="@{'detalle/' + ${noticia.id}}" th:text="${noticia.tituloNoticia}">Titulo Noticia</a>
+                                     <a th:href="@{'/noticias/detalle/' + ${noticia.id}}" th:text="${noticia.tituloNoticia}">Titulo Noticia</a>
                                  </em>
                                  <div class="wrap">
                                      <p th:text="${noticia.resumenNoticia}">Resumen</p>
                                      <!-- Enlace al detalle de la noticia -->
-                                     <a th:href="@{'detalle/' + ${noticia.id}}" class="btn-link fa-angle-right"></a>
+
                                  </div>
                              </div>
                          </div>
