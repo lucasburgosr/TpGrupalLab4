@@ -50,8 +50,8 @@
 
 			<div class="help-box text-right">
 				<p>Telefono</p>
-				<a href="callto:#">800-2345-6789</a>
-				<small><span>Horario:</span>  6am-4pm PST M-Th; &nbsp;6am-3pm PST Fri</small>
+				<a th:href="@{/empresa.telefono}"  th:text="${empresa.getTelefono()}"></a>
+				<small th:href="@{/empresa.horarioAtencion}" th:text="${empresa.getHorarioAtencion()}"><span>Horario:</span> </small>
 			</div>
 		</div>
 
@@ -61,10 +61,10 @@
 					<div class="">
 						<ul class="nav navbar-nav sf-menu sf-js-enabled sf-arrows" data-type="navbar">
 							<li style="list-style: none;" class="active">
-								<a href="home.html">INICIO</a>
+								<a th:href="@{'/empresas/home/' + ${empresa.id}}" class="btn btn-info btn-sm">VOLVER</a>
 							</li>
 							<li style="list-style: none;">
-								<a href="index.html">LISTA EMPRESAS</a>
+								<a th:href="@{/empresas/listaEmpresas}" class="btn btn-info">LISTA EMPRESAS</a>
 							</li>
 						</ul>
 					</div>
@@ -87,121 +87,6 @@
                               CONTENT
     =========================================================-->
 
-	<!-- <main>
-
-       <section class="well well4">
-
-         <div class="container">
-
-           <h2>
-             Texto Buscado
-           </h2>
-           <div class="row offs2">
-
-             <table width="90%" align="center">
-                 <tbody>
-                     <tr>
-                         <td>
-                             <a href="detalle.html">
-                                 <img width="250px" class="imgNoticia" src="http://localhost:82/template_html/images/page-1_slide1.jpg?1583775512626" alt="">
-                             </a>
-                         </td>
-                         <td width="25"></td>
-                         <td style="text-align:justify;" valign="top">
-                             <a style="text-align:justify; font-size:20px" href="detalle.html" class="banner">
-                                 Titulo									</a>
-                             <div class="verOcultar">
-                                 Resumen de la Noticia<a href="detalle.html" style="color:blue"> Leer Mas - 2020-02-14</a>
-                             </div>
-                         </td>
-                     </tr>
-                 </tbody>
-             </table>
-             <hr>
-             <table width="90%" align="center">
-                 <tbody>
-                     <tr>
-                         <td>
-                             <a href="detalle.html">
-                                 <img width="250px" class="imgNoticia" src="http://localhost:82/template_html/images/page-1_slide1.jpg?1583775512626" alt="">
-                             </a>
-                         </td>
-                         <td width="25"></td>
-                         <td style="text-align:justify;" valign="top">
-                             <a style="text-align:justify; font-size:20px" href="detalle.html" class="banner">
-                                 Titulo									</a>
-                             <div class="verOcultar">
-                                 Resumen de la Noticia<a href="detalle.html" style="color:blue"> Leer Mas - 2020-02-14</a>
-                             </div>
-                         </td>
-                     </tr>
-                 </tbody>
-             </table>
-             <hr>
-             <table width="90%" align="center">
-                 <tbody>
-                     <tr>
-                         <td>
-                             <a href="detalle.html">
-                                 <img width="250px" class="imgNoticia" src="http://localhost:82/template_html/images/page-1_slide1.jpg?1583775512626" alt="">
-                             </a>
-                         </td>
-                         <td width="25"></td>
-                         <td style="text-align:justify;" valign="top">
-                             <a style="text-align:justify; font-size:20px" href="detalle.html" class="banner">
-                                 Titulo									</a>
-                             <div class="verOcultar">
-                                 Resumen de la Noticia<a href="detalle.html" style="color:blue"> Leer Mas - 2020-02-14</a>
-                             </div>
-                         </td>
-                     </tr>
-                 </tbody>
-             </table>
-             <hr>
-             <table width="90%" align="center">
-                 <tbody>
-                     <tr>
-                         <td>
-                             <a href="detalle.html">
-                                 <img width="250px" class="imgNoticia" src="http://localhost:82/template_html/images/page-1_slide1.jpg?1583775512626" alt="">
-                             </a>
-                         </td>
-                         <td width="25"></td>
-                         <td style="text-align:justify;" valign="top">
-                             <a style="text-align:justify; font-size:20px" href="detalle.html" class="banner">
-                                 Titulo									</a>
-                             <div class="verOcultar">
-                                 Resumen de la Noticia<a href="detalle.html" style="color:blue"> Leer Mas - 2020-02-14</a>
-                             </div>
-                         </td>
-                     </tr>
-                 </tbody>
-             </table>
-             <hr>
-             <table width="90%" align="center">
-                 <tbody>
-                     <tr>
-                         <td>
-                             <a href="detalle.html">
-                                 <img width="250px" class="imgNoticia" src="http://localhost:82/template_html/images/page-1_slide1.jpg?1583775512626" alt="">
-                             </a>
-                         </td>
-                         <td width="25"></td>
-                         <td style="text-align:justify;" valign="top">
-                             <a style="text-align:justify; font-size:20px" href="detalle.html" class="banner">
-                                 Titulo									</a>
-                             <div class="verOcultar">
-                                 Resumen de la Noticia<a href="detalle.html" style="color:blue"> Leer Mas - 2020-02-14</a>
-                             </div>
-                         </td>
-                     </tr>
-                 </tbody>
-             </table>
-             <hr>
-           </div>
-         </div>
-       </section>
-     </main>-->
 	<main>
 		<section class="well well4">
 			<div class="container">
@@ -227,7 +112,7 @@
 								<div class="verOcultar">
 									<!-- Mostrar el resumen de la noticia -->
 									<span th:text="${noticia.resumenNoticia}"></span>
-									<a th:href="@{'detalle.html?id=' + ${noticia.id}}" style="color: blue">Leer Más - <span></span></a>
+									<a th:href="@{'detalle/' + ${noticia.id}}" style="color: blue">Leer Más - <span></span></a>
 								</div>
 							</td>
 						</tr>
@@ -247,7 +132,8 @@
 			<div class="container">
 				<p class="rights">
 					Denominación Empresa  &#169; <span id="copyright-year"></span>
-					<a href="index-5.html">Privacy Policy</a>
+					<a th:href="@{/index-5.html}">Privacy Policy</a>
+
 					<!-- {%FOOTER_LINK} -->
 				</p>
 			</div>
@@ -258,8 +144,9 @@
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="js/bootstrap.min.js"></script>
-<script src="js/tm-scripts.js"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/tm-scripts.js}"></script>
+
 <!-- </script> -->
 
 <!-- coded by vitlex -->
