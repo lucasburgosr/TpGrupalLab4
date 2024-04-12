@@ -1,69 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="format-detection" content="telephone=no"/>
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/x-icon">
     <title>HOME</title>
+    <!-- Bootstrap -->
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
 
     <!-- Links -->
-    <link rel="stylesheet" href="../static/css/camera.css">
-    <link rel="stylesheet" href="../static/css/search.css">
-    <link rel="stylesheet" href="../static/css/google-map.css">
+    <link th:href="@{/css/search.css}" rel="stylesheet">
 
 
     <!--JS-->
-    <script src="../static/js/jquery.js"></script>
-    <script src="../static/js/jquery-migrate-1.2.1.min.js"></script>
-    <script src="../static/js/rd-smoothscroll.min.js"></script>
+    <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/jquery-migrate-1.2.1.min.js}"></script>
+    <script th:src="@{/js/rd-smoothscroll.min.js}"></script>
 
 
     <!--[if lt IE 9]>
     <div style=' clear: both; text-align:center; position: relative;'>
-        <a href="http://windows.microsoft.com/en-US/internet-explorer/..">
-            <img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820"
-                 alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."/>
+      <a th:href="@{http://windows.microsoft.com/en-US/internet-explorer/..}">Enlace a Internet Explorer</a>
+
+      <img th:src="@{/images/ie8-panel/warning_bar_0000_us.jpg}" border="0" height="42" width="820"
+          alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."/>
         </a>
     </div>
     <script src="../static/js/html5shiv.js"></script>
     <![endif]-->
     <script src='../static/js/device.min.js'></script>
-    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css">
+
   </head>
   <body>
   <div class="page">
   <!--========================================================
                             HEADER
   =========================================================-->
-    <header>  
+    <header>
       <div class="container top-sect">
         <div class="navbar-header">
           <h1 class="navbar-brand">
-            <a data-type='rd-navbar-brand'  href="./"><small>Denominación <br>Empresa</small></a>
+            <a data-type='rd-navbar-brand' th:href="@{/empresa.denominacion}">
+              <small th:text="${empresa.getDenominacion()}">Denominación Empresa</small>
+            </a>
           </h1>
           <a class="search-form_toggle" href="#"></a>
         </div>
 
         <div class="help-box text-right">
           <p>Telefono</p>
-          <a href="callto:#">800-2345-6789</a>
-          <small><span>Horario:</span>  6am-4pm PST M-Th; &nbsp;6am-3pm PST Fri</small>
+          <a th:href="@{/empresa.telefono}"  th:text="${empresa.getTelefono()}"></a>
+          <small th:href="@{/empresa.horarioAtencion}"  th:text="${empresa.getHorarioAtencion()}"><span>Horario:</span></small>
         </div>
       </div>
-     
+
 	  <div id="stuck_container" class="stuck_container">
-        <div class="container">   
-			<nav class="navbar navbar-default navbar-static-top pull-left">            
-				<div class="">  
+        <div class="container">
+			<nav class="navbar navbar-default navbar-static-top pull-left">
+				<div class="">
 				  <ul class="nav navbar-nav sf-menu sf-js-enabled sf-arrows" data-type="navbar">
 					<li style="list-style: none;" class="active">
-					  <a th:href="@{${empresa.id}}">INICIO</a>
+					  <a th:href="@{ ${empresa.id}}">INICIO</a>
 					</li>
 					<li style="list-style: none;">
                       <a th:href="@{/empresas/listaEmpresas}" class="btn btn-secondary">LISTA EMPRESAS</a>
+
 					</li>
                     <li style="list-style: none;">
                       <!-- Botón para agregar noticia -->

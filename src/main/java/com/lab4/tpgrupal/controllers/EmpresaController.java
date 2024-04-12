@@ -69,7 +69,9 @@ public class EmpresaController extends BaseControllerImpl<Empresa, EmpresaServic
             // Manejo de errores
             return "error";
         }
+
     }
+
 
 
 

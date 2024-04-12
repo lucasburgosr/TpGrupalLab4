@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -40,9 +40,11 @@
     <header>  
       <div class="container top-sect">
         <div class="navbar-header">
-          <h1 class="navbar-brand">
-            <a data-type='rd-navbar-brand'  href="./" th:text="@{empresa.denominacion}"><small></small></a>
-          </h1>
+            <h1 class="navbar-brand">
+                <a data-type='rd-navbar-brand' th:href="@{/empresa.denominacion}">
+                    <small th:text="${empresa.getDenominacion()}">Denominación Empresa</small>
+                </a>
+            </h1>
           <a class="search-form_toggle" href="#"></a>
         </div>
 
@@ -59,10 +61,10 @@
 				<div class="">  
 				  <ul class="nav navbar-nav sf-menu sf-js-enabled sf-arrows" data-type="navbar">
 					<li style="list-style: none;" class="active">
-					  <a href="home.html">INICIO</a>
+                        <a th:href="@{ ${empresa.id}}">INICIO</a>
 					</li>
 					<li style="list-style: none;">
-					  <a href="./">LISTA EMPRESAS</a>
+                        <a th:href="@{/empresas/listaEmpresas}" class="btn btn-secondary">LISTA EMPRESAS</a>
 					</li>
 				  </ul>                           
 				</div>
@@ -84,43 +86,6 @@
   <!--========================================================
                             CONTENT
   =========================================================-->
-
-   <!-- <main>
-
-      <section class="well well4">
-		
-        <div class="container">
-			<center>
-				<div id="imagenPrincipal" style="height: 450px; background-image: url('http://localhost:82/template_html/images/page-1_slide1.jpg?1583775512626'); background-repeat: no-repeat;background-size: cover;">
-					<div style="text-align:left; background-color: rgba(1,1,1,0.5);color: #ffffff;font-size: 16px;line-height: 50px;">
-					 Titulo de la Noticia                        
-					</div>
-				</div>
-			</center>
-		  <h2>
-            Titulo de la Noticia
-          </h2>
-		  Fecha Publicacion: 12/02/2020
-		  <hr>
-          <div class="row offs2">
-            
-            <div class="col-lg-12">
-              <dl class="terms-list">
-                <dt>
-					Resumen de la noticia
-                </dt>
-				<hr>
-                <dd>
-					Contenido HTML de la Noticia
-				</dd>
-              </dl>
-            </div>
-          </div>
-        </div>
-      </section>   
-      
-
-    </main>-->
 
       <main>
           <section class="well well4">
