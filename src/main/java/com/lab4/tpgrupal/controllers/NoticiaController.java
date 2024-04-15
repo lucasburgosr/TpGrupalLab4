@@ -37,9 +37,10 @@ public class NoticiaController extends BaseControllerImpl<Noticia, NoticiaServic
             ModelAndView modelAndView = new ModelAndView("detalle"); // Nombre de la vista
             modelAndView.addObject("noticia", noticia); // Agregar la noticia al modelo
             modelAndView.addObject("empresa", empresa);
+            modelAndView.addObject("rutaImagen", "/images/imagenesnoticias/" + noticia.getImagenNoticia());
             return modelAndView;
         } catch (Exception e) {
-            return new ModelAndView("error");
+            return new ModelAndView("404");
         }
     }
 
@@ -75,13 +76,16 @@ public class NoticiaController extends BaseControllerImpl<Noticia, NoticiaServic
 
 
     @PostMapping("/agregar")
-    public ModelAndView agregarNoticia(@ModelAttribute Noticia noticia) {
+    public ModelAndView agregarNoticia(@ModelAttribute Noticia noticia, @RequestParam("archivoImagen") MultipartFile archivoImagen) {
         ModelAndView modelAndView = new ModelAndView();
         try {
-            // Establecer la fecha de publicación truncada a solo la fecha
             noticia.setFechaPublicacion(LocalDateTime.now().truncatedTo(ChronoUnit.DAYS));
 
-            // Crear la noticia
+            String nombreImagen = noticiaService.guardarImagen(archivoImagen);
+
+
+            noticia.setImagenNoticia(nombreImagen);
+
             noticiaService.crear(noticia);
 
             // Obtener el ID de la noticia recién creada
@@ -94,8 +98,6 @@ public class NoticiaController extends BaseControllerImpl<Noticia, NoticiaServic
         }
         return modelAndView;
     }
-
-
 
 
     @GetMapping("/buscador")

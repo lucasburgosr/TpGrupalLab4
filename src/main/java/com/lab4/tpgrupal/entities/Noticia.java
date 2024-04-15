@@ -21,8 +21,7 @@ public class Noticia extends Base {
     @Column(name = "resumen")
     private String resumenNoticia;
     @Column(name = "imagen")
-    @Lob
-    private byte[] imagenNoticia;
+    private String imagenNoticia;
     @Column(name = "contenidoHTML")
     private String contenidoHtml;
     @Column(name = "publicada")

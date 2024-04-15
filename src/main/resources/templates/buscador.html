@@ -100,9 +100,9 @@
 						<tr th:each="noticia : ${noticias}">
 							<td>
 								<!-- Enlace a la página de detalle de la noticia -->
-								<a th:href="@{'detalle.html?id=' + ${noticia.id}}">
+								<a th:href="@{'detalle/' + ${noticia.id}}">
 									<!-- Mostrar la imagen de la noticia -->
-									<img width="250px" class="imgNoticia" th:src="${noticia.imagenNoticia}" alt="">
+									<img width="250px" class="imgNoticia" th:src="@{/images/imagenesnoticias/{imagenNoticia}(imagenNoticia=${noticia.imagenNoticia})}" alt="">
 								</a>
 							</td>
 							<td th:width="25"></td>
@@ -124,6 +124,7 @@
 			</div>
 		</section>
 	</main>
+
 	<!--========================================================
                             FOOTER
   =========================================================-->
