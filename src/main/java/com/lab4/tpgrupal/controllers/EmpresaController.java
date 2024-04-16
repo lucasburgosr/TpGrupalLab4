@@ -45,10 +45,11 @@ public class EmpresaController extends BaseControllerImpl<Empresa, EmpresaServic
     public String mostrarHome(@PathVariable Integer id, Model model) {
         try {
             Empresa empresa = empresaServicio.buscarPorId(id);
+            Noticia noticia = new Noticia();
             model.addAttribute("empresa", empresa);
-
+            model.addAttribute("noticia", noticia);
             // Obtener las 5 primeras noticias de la empresa
-            List<Noticia> noticias = noticiaService.buscarPorEmpresa(id);
+            List<Noticia> noticias = noticiaService.obtenerUltimas5Noticias(id);
             model.addAttribute("noticias", noticias);
 
             return "home";
@@ -56,7 +57,6 @@ public class EmpresaController extends BaseControllerImpl<Empresa, EmpresaServic
             return "404";
         }
     }
-
 
     @GetMapping("/agregar")
     public String mostrarFormularioAgregar(Model model) {
@@ -92,6 +92,7 @@ public class EmpresaController extends BaseControllerImpl<Empresa, EmpresaServic
         return "error";
     }
     }
+
 
 
 

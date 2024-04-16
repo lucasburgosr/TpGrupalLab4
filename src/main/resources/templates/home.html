@@ -35,8 +35,8 @@
     </div>
     <script src="../static/js/html5shiv.js"></script>
     <![endif]-->
-    <script src='../static/js/device.min.js'></script>
-
+    <script th:src="@{/js/device.min.js}"></script>
+    <script th:src="@{/js/slick.min.js}"></script>
   </head>
   <body>
   <div class="page">
@@ -104,46 +104,28 @@
      <section class="well well1 well1_ins1">
          <div class="camera_container">
              <div id="camera" class="camera_wrap">
-                 <!-- Iterar sobre las últimas 5 noticias -->
-                 <th:block th:each="noticia : ${ultimas5Noticias}">
-                     <div th:data-src="${noticia.imagenNoticia}">
-                         <div class="camera_caption fadeIn">
-                             <div class="jumbotron">
-                                 <em>
-                                     <!-- Enlace a la página de detalle de la noticia -->
-                                     <a th:href="@{'/noticias/detalle/' + ${noticia.id}}" th:text="${noticia.tituloNoticia}">Titulo Noticia</a>
-                                 </em>
-                                 <div class="wrap">
-                                     <p th:text="${noticia.resumenNoticia}">Resumen</p>
-                                     <!-- Enlace al detalle de la noticia -->
-                                     <a th:href="@{'/noticias/detalle/' + ${noticia.id}}" class="btn-link fa-angle-right"></a>
-                                 </div>
-                             </div>
+                 <div th:each="noticia : ${noticias}" class="camera-slide">
+                     <a th:href="@{'/noticias/detalle/' + ${noticia.id}}">
+                         <img th:src="@{'/images/imagenesnoticias/' + ${noticia.getImagenNoticia()}}" style="height: 200px; width: auto;" alt="Imagen de Noticia"/>
+                     </a>
+                     <div class="camera_caption fadeIn">
+                         <em>
+                             <!-- Enlace a la página de detalle de la noticia -->
+                             <a th:href="@{'/noticias/detalle/' + ${noticia.id}}" th:text="${noticia.tituloNoticia}">Titulo Noticia</a>
+                         </em>
+                         <div class="wrap">
+                             <p th:text="${noticia.resumenNoticia}">Resumen</p>
+                             <!-- Enlace al detalle de la noticia -->
+                             <a th:href="@{'/noticias/detalle/' + ${noticia.id}}" class="btn-link fa-angle-right">Ver más</a>
                          </div>
                      </div>
-                 </th:block>
+                 </div>
              </div>
          </div>
      </section>
 
-     <script th:inline="javascript">
-         $(document).ready(function(){
-             $('#camera').camera({
-                 height: 'auto',
-                 loader: 'none',
-                 pagination: true,
-                 thumbnails: false,
-                 hover: false,
-                 playPause: false,
-                 navigation: true,
-                 navigationHover: false,
-                 mobileNavHover: false,
-                 fx: 'simpleFade'
-             });
-         });
-     </script>
 
-      <section class="well well2 wow fadeIn  bg1" data-wow-duration='3s'>
+     <section class="well well2 wow fadeIn  bg1" data-wow-duration='3s'>
         <div class="container">
         <h2 class="txt-pr">Quienes Somos</h2>
           <div class="row">
@@ -184,11 +166,24 @@
   </div>
 
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/tm-scripts.js"></script>
-  <!-- </script> -->
+
+
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script src="/js/tm-scripts.js"></script>
+
+
+  <script>
+      $(document).ready(function(){
+          $('#camera').slick({
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              autoplay: true,
+              autoplaySpeed: 2000,
+              arrows: true, // Puedes ajustar esto según tus necesidades
+              dots: true // Puedes ajustar esto según tus necesidades
+          });
+      });
+  </script>
 
 
   </body>

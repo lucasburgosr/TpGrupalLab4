@@ -44,21 +44,7 @@ public class NoticiaController extends BaseControllerImpl<Noticia, NoticiaServic
         }
     }
 
-    /*@GetMapping("/detalle/{id}")
-    public String mostrarDetalle(@PathVariable Integer id, Model model) {
-        try {
-            Noticia noticia = noticiaService.buscarPorId(id);
-            model.addAttribute("noticia", noticia);
 
-            Empresa empresa = noticia.getEmpresa();
-            model.addAttribute("empresa", empresa);
-
-
-            return "detalle";
-        } catch (Exception e) {
-            return "404";
-        }
-    } */
 
 
     @GetMapping("/agregar")
@@ -157,10 +143,6 @@ public class NoticiaController extends BaseControllerImpl<Noticia, NoticiaServic
         }
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String home(Model model) {
-        List<Noticia> ultimasNoticias = noticiaService.obtenerUltimas5Noticias();
-        model.addAttribute("ultimasNoticias", ultimasNoticias);
-        return "home";
-    }
+
+
 }

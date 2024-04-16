@@ -25,7 +25,7 @@ public class NoticiaServiceImpl extends BaseServiceImpl<Noticia, Integer> implem
         super(baseRepository);
         this.noticiaRepository = noticiaRepository;
     }
-    public List<Noticia> obtenerUltimas5Noticias() {
+    public List<Noticia> obtenerUltimas5Noticias(Integer idEmpresa) {
         return noticiaRepository.findTop5ByOrderByFechaPublicacionDesc();
     }
     public List<Noticia> buscarNoticiasPorPalabraClave(String palabraClave) {
